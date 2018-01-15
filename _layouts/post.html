@@ -3,15 +3,32 @@ layout: default
 ---
 
 <article class="post">
-  <h1>{{ page.title }}</h1>
-
-  <div class="entry">
-    {{ content }}
+  <div class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.tags.size > 0 %}
+      <div class="post-tags">
+        {% for tag in page.tags %}
+          {% capture tag_name %}{{ tag }}{% endcapture %}
+          <a href="{{ site.baseurl }}{{ post.url }}{{ site.tagurl }}/?q={{ tag }}" class="post-tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
+  <div class="post-content">
+    <div class="post-entry">
+      {{ content }}
+    </div>
   </div>
 
-  {% include disqus.html %}
+  <div class="post-footer">
+    <div class="post-date">
+      {% if page.updated %}
+        Updated on {{ page.updated | date: "%B %e, %Y" }}<br/>
+      {% endif %}
+      Written on {{ page.date | date: "%B %e, %Y" }}
+    </div>
+
+    {% include disqus.html %}
+  </div>
 </article>

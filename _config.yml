@@ -7,6 +7,7 @@ url: https://bennyluk.github.io/
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
 baseurl: /blog
+tagurl: /tag
 
 name: Benny Luk
 description: while (! succeed = try());

@@ -16,57 +16,54 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
   </head>
 
   <body>
-    <header class="site-header">
-      <a href="#" class="site-title">
+    <header id="site-header">
+      <a href="{{ site.baseurl }}/" class="site-title">
         <div class="site-logo"></div>
         Ivory Tower
       </span>
       <nav class="site-menu">
-        <a href="#">Articles</a>
-        <a href="#">Portfolio</a>
+        <!---
+        <a href="{{ site.baseurl }}/archive">Archive</a>
+        --->
+        <a href="{{ site.baseurl }}/tags">Tags</a>
+        <a href="{{ site.url }}">Portfolio</a>
       </nav>
     </header>
     <section id="content">
+      <div class="container">
+        {{ content }}
+      </div>
     </section>
-
-    <!---
-    <div class="wrapper-masthead">
+    <footer id="site-footer">
       <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
-          <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
-            <a href="{{ site.baseurl }}/about">About</a>
-          </nav>
-        </header>
+        <div>&copy; Benny 2018. Hosting provided by Github.</div>
+        <ul id="footer-social-icons">
+					<li>
+						<a href="mailto:{{ site.social.email }}" target="_top" class="social-email">
+							<i class="fa fa-fw fa-envelope fa-2x"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/{{ site.social.github }}" target="_blank" class="social-github">
+							<i class="fa fa-fw fa-github-square fa-2x"></i>
+						</a>
+					</li>
+					<li>
+						 <a href="https://ca.linkedin.com/in/{{ site.social.linkedin }}" target="_blank" class="social-linkedin">
+							<i class="fa fa-fw fa-linkedin-square fa-2x"></i>
+						</a>
+					</li>
+				</ul>
       </div>
-    </div>
-
-    <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
-
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
-      </div>
-    </div>
-    --->
-    <div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </div>
+    </footer>
   </body>
 </html>

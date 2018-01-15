@@ -1,0 +1,82 @@
+---
+layout: default
+title: "Tag"
+permalink: /tag/
+---
+
+<div class="filter-posts-container">
+  <h1 class="filter-posts-header"></h1>
+  <h4 class='filter-posts-loading'>
+    <i class="fa fa-spinner fa-pulse fa-fw"></i>
+  </h4>
+  <div class="filter-posts" style="display: none;">
+    {% for post in site.posts %}
+      <article class="site-article-list-item" data-tags="{{ post.tags | join '' | downcase}}">
+        <h3 class="article-header">
+          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+        </h3>
+
+        <div class="article-date">
+          {% if post.updated %}
+            {{ post.updated | date: "%b %e, %Y" }}
+          {% else %}
+            {{ post.date | date: "%b %e, %Y" }}
+          {% endif %}
+        </div>
+
+        <div class="article-entry">
+          {{ post.description }}
+        </div>
+
+        {% if post.tags.size > 0 %}
+          <div class="article-tags">
+            {% for tag in post.tags %}
+              {% capture tag_name %}{{ tag }}{% endcapture %}
+              <a href="{{ site.baseurl }}{{ site.tagurl }}/?q={{ tag }}" class="post-tag">{{ tag }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  $(function() {
+    function findGetParameter(parameterName) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+              tmp = item.split("=");
+              if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }
+
+    var query = findGetParameter("q");
+
+    var $filterPosts = $(".filter-posts");
+
+    if(query) {
+      document.title = document.title.replace("Tag", query);
+
+      query = query.trim().toLowerCase();
+
+      $(".filter-posts-header").text(query);
+
+      $filterPosts.find(".site-article-list-item").filter(function() {
+        return this.getAttribute("data-tags").indexOf(query) === -1
+      }).remove();
+    }
+
+    if($filterPosts.find(".site-article-list-item").length) {
+      $filterPosts.show();
+      $(".filter-posts-loading").hide();
+    } else {
+      $(".filter-posts-loading").addClass("filter-posts-empty");
+    }
+  });
+</script>

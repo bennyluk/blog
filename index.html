@@ -2,17 +2,33 @@
 layout: default
 ---
 
-<div class="posts">
+<div class="site-articles-list">
   {% for post in site.posts %}
-    <article class="post">
+    <article class="site-article-list-item" data-tags="{{ post.tags | join '' | downcase}}">
+      <h3 class="article-header">
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </h3>
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
+      <div class="article-date">
+        {% if post.updated %}
+          {{ post.updated | date: "%b %e, %Y" }}
+        {% else %}
+          {{ post.date | date: "%b %e, %Y" }}
+        {% endif %}
       </div>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      <div class="article-entry">
+        {{ post.description }}
+      </div>
+
+      {% if post.tags.size > 0 %}
+        <div class="article-tags">
+          {% for tag in post.tags %}
+            {% capture tag_name %}{{ tag }}{% endcapture %}
+            <a href="{{ site.baseurl }}{{ site.tagurl }}/?q={{ tag }}" class="post-tag">{{ tag }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
     </article>
   {% endfor %}
 </div>
